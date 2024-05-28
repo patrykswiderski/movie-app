@@ -1,7 +1,12 @@
+import { Outlet } from "react-router-dom";
 import "./App.css";
 
 function App() {
-  return <main className="text-lg text-red-500 font-bold">Movie App</main>;
+  return (
+    <main>
+      <Outlet />
+    </main>
+  );
 }
 
 export default App;
