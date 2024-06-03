@@ -1,13 +1,17 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import moment from "moment";
-import { IoStarSharp } from "react-icons/io5";
+import { IoStar } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const Card = ({ data, trending, index }) => {
 	const imageURL = useSelector((state) => state.movieflixData.imageURL);
 
 	return (
-		<div className="w-full max-w-[210px] rounded h-80 overflow-hidden relative">
+		<Link
+			to={"/" + data.media_type + "/" + data.id}
+			className="w-full min-w-[230px] max-w-[230px] rounded h-80 overflow-hidden relative"
+		>
 			<img
 				src={imageURL + data?.poster_path}
 				alt="poster"
@@ -27,12 +31,13 @@ const Card = ({ data, trending, index }) => {
 				</h2>
 				<div className="text-sm text-neutral-400 flex justify-between items-center">
 					<p>{moment(data?.release_date).format("MMMM Do YYYY")}</p>
-					<p className="bg-black text-neutral-200 px-1 rounded-full flex gap-1 items-center">
-						<IoStarSharp /> {data.vote_average.toFixed(1)}
-					</p>
+					<div className="flex gap-1 items-baseline bg-black text-neutral-200 px-1 text-sm rounded-full">
+						<IoStar />
+						<p>{data.vote_average.toFixed(1)}</p>
+					</div>
 				</div>
 			</div>
-		</div>
+		</Link>
 	);
 };
 

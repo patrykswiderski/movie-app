@@ -38,7 +38,7 @@ const BannerHome = () => {
 				{bannerData.map((data, index) => {
 					return (
 						<div
-							key={index}
+							key={data.id + "bannerHome" + index}
 							className="min-w-full min-h-[450px] lg:min-h-full overflow-hidden relative group transition-all"
 							style={{ transform: `translateX(${currentImage * -100}%)` }}
 						>
@@ -52,10 +52,10 @@ const BannerHome = () => {
 
 							{/*** button next and prev image***/}
 							<div className="absolute top-0 w-full h-full hidden group-hover:lg:flex items-center justify-between px-4">
-								<button className="bg-white text-black z-10 p-1 rounded-full text-xl">
+								<button className="bg-white/70 text-black z-10 p-1 rounded-full text-xl">
 									<FaAngleLeft onClick={handlePrev} />
 								</button>
-								<button className="bg-white text-black z-10 p-1 rounded-full text-xl">
+								<button className="bg-white/70 text-black z-10 p-1 rounded-full text-xl">
 									<FaAngleRight onClick={handleNext} />
 								</button>
 							</div>
