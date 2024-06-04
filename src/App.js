@@ -38,7 +38,7 @@ function App() {
 	return (
 		<main className="pb-14 lg:pb-0">
 			<Header />
-			<div className="pt-16">
+			<div className="min-h-[70vh]">
 				<Outlet />
 			</div>
 			<Footer />

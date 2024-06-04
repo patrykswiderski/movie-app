@@ -13,11 +13,17 @@ const Card = ({ data, trending, index, media_type }) => {
 			to={"/" + mediaType + "/" + data.id}
 			className="w-full min-w-[230px] max-w-[230px] block rounded h-80 overflow-hidden relative hover:scale-110 transition-all ease-in-out"
 		>
-			<img
-				src={imageURL + data?.poster_path}
-				alt="poster"
-				className="object-cover"
-			/>
+			{data?.poster_path ? (
+				<img
+					src={imageURL + data?.poster_path}
+					alt="poster"
+					className="object-cover"
+				/>
+			) : (
+				<div className="bg-neutral-800 w-full h-full flex justify-center items-center">
+					No image found
+				</div>
+			)}
 			<div className="absolute top-3">
 				{" "}
 				{trending && (
@@ -34,7 +40,7 @@ const Card = ({ data, trending, index, media_type }) => {
 					<p>{moment(data?.release_date).format("MMMM Do YYYY")}</p>
 					<div className="flex gap-1 items-baseline bg-black text-neutral-200 px-1 text-sm rounded-full">
 						<IoStar />
-						<p>{data.vote_average.toFixed(1)}</p>
+						<p>{data?.vote_average?.toFixed(1)}</p>
 					</div>
 				</div>
 			</div>

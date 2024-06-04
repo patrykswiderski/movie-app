@@ -9,8 +9,6 @@ const ExplorePage = () => {
 	const [data, setData] = useState([]);
 	const [totalPage, setTotalPage] = useState(0);
 
-	console.log("params", params.explore);
-
 	const fetchData = async () => {
 		try {
 			const response = await axios.get(`/discover/${params.explore}`, {
@@ -21,7 +19,6 @@ const ExplorePage = () => {
 			setData((prev) => {
 				return [...prev, ...response?.data?.results];
 			});
-			console.log();
 			setTotalPage(response?.data?.total_pages);
 		} catch (error) {
 			console.log("error", error);
@@ -49,10 +46,11 @@ const ExplorePage = () => {
 	}, []);
 
 	return (
-		<div className="pt-16 ">
+		<div className="py-16 ">
 			<div className="container mx-auto">
 				<h3 className="capitalize text-lg lg:text-3xl font-semibold my-3">
-					Popular {params.explore} Show
+					Popular {params.explore}
+					{params.explore === "tv" ? " Shows" : "s"}
 				</h3>
 
 				<div className="grid grid-cols-[repeat(auto-fit,230px)] gap-5">
