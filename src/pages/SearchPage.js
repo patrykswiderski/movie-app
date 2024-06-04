@@ -1,16 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Card from "../components/Card";
 
 const SearchPage = () => {
 	const location = useLocation();
 	const [data, setData] = useState([]);
 	const [page, setPage] = useState(1);
+	const navigate = useNavigate();
 
 	const fetchData = async () => {
 		try {
-			const response = await axios.get("/search/collection", {
+			const response = await axios.get("/search/multi", {
 				params: {
 					query: location?.search?.slice(3),
 					page: page,
@@ -46,6 +47,15 @@ const SearchPage = () => {
 
 	return (
 		<div className="py-16">
+			<div className="lg:hidden my-2 mx-1 sticky top-[65px] z-30">
+				<input
+					type="text"
+					placeholder="Search here..."
+					onChange={(e) => navigate(`/search?q=${e.target.value}`)}
+					className="px-4 py-1 w-full text-lg bg-neutral-100 text-neutral-900 rounded-full outline-none border-none"
+				/>
+			</div>
+
 			<div className="container mx-auto">
 				<h3 className="capitalize text-lg lg:text-3xl font-semibold my-3">
 					Search Results
