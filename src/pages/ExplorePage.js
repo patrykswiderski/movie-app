@@ -36,7 +36,13 @@ const ExplorePage = () => {
 
 	useEffect(() => {
 		fetchData();
-	}, [pageNo]);
+	}, [pageNo, params.explore]);
+
+	useEffect(() => {
+		setPageNo(1);
+		setData([]);
+		fetchData();
+	}, [params.explore]);
 
 	useEffect(() => {
 		window.addEventListener("scroll", handleScroll);
