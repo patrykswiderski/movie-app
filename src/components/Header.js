@@ -22,7 +22,7 @@ const Header = () => {
 	};
 
 	return (
-		<header className="fixed top-0 w-full h-16 bg-black bg-opacity-60 z-40">
+		<header className="fixed top-0 w-full h-16 bg-black bg-opacity-70 z-40">
 			<div className="container mx-auto px-3 flex items-center h-full">
 				<Link to="/">
 					<img src={Logo} alt="logo" width={120} />
@@ -55,7 +55,7 @@ const Header = () => {
 							onChange={(e) => setSearchInput(e.target.value)}
 							value={searchInput}
 						/>
-						<button className="text-2xl text-white">
+						<button className="text-2xl text-white hidden lg:block">
 							<IoSearchOutline />
 						</button>
 					</form>
