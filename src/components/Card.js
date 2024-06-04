@@ -4,13 +4,14 @@ import moment from "moment";
 import { IoStar } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
-const Card = ({ data, trending, index }) => {
+const Card = ({ data, trending, index, media_type }) => {
 	const imageURL = useSelector((state) => state.movieflixData.imageURL);
 
+	const mediaType = data.media_type ?? media_type;
 	return (
 		<Link
-			to={"/" + data.media_type + "/" + data.id}
-			className="w-full min-w-[230px] max-w-[230px] rounded h-80 overflow-hidden relative"
+			to={"/" + mediaType + "/" + data.id}
+			className="w-full min-w-[230px] max-w-[230px] block rounded h-80 overflow-hidden relative hover:scale-110 transition-all ease-in-out"
 		>
 			<img
 				src={imageURL + data?.poster_path}

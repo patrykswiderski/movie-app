@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
 import BannerHome from "../components/BannerHome";
 import { useSelector } from "react-redux";
 import HorizontalScrollCard from "../components/HorizontalScrollCard";
-import axios from "axios";
 import useFetch from "../hooks/useFetch";
 
 const Home = () => {
@@ -10,6 +8,8 @@ const Home = () => {
 
 	const { data: nowPlayingData } = useFetch("/movie/now_playing");
 	const { data: topRatedData } = useFetch("/movie/top_rated");
+	const { data: popularTvData } = useFetch("/tv/popular");
+	const { data: onTheAirData } = useFetch("/tv/on_the_air");
 
 	return (
 		<div>
@@ -20,7 +20,9 @@ const Home = () => {
 				trending={true}
 			/>
 			<HorizontalScrollCard data={nowPlayingData} heading="Now Playing" />
-			<HorizontalScrollCard data={topRatedData} heading="Top Rated" />
+			<HorizontalScrollCard data={topRatedData} heading="Top Rated Movies" />
+			<HorizontalScrollCard data={popularTvData} heading="Popular TV Shows" />
+			<HorizontalScrollCard data={onTheAirData} heading="On The Air TV Shows" />
 		</div>
 	);
 };
