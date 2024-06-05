@@ -46,14 +46,14 @@ const ExplorePage = () => {
 	}, []);
 
 	return (
-		<div className="py-16 ">
+		<div className="py-16">
 			<div className="container mx-auto">
-				<h3 className="capitalize text-lg lg:text-3xl font-semibold my-3">
+				<h3 className="capitalize text-lg lg:text-3xl font-semibold px-3 my-3">
 					Popular {params.explore}
 					{params.explore === "tv" ? " Shows" : "s"}
 				</h3>
 
-				<div className="grid grid-cols-[repeat(auto-fit,230px)] gap-5">
+				<div className="grid grid-cols-[repeat(auto-fit,230px)] gap-5 justify-center lg:justify-start">
 					{data.map((exploreData, index) => {
 						return (
 							<Card
