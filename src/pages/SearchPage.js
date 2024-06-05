@@ -63,7 +63,7 @@ const SearchPage = () => {
 	const debouncedNavigate = useCallback(
 		_.debounce((value) => {
 			navigate(`/search?q=${value}`);
-		}, 750),
+		}, 1000),
 		[navigate]
 	);
 
