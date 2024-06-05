@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { IoPlayCircleSharp } from "react-icons/io5";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import VideoPlay from "./VideoPlay";
 
 const BannerHome = () => {
 	const bannerData = useSelector((state) => state.movieflixData.bannerData);
 	const imageURL = useSelector((state) => state.movieflixData.imageURL);
 	const [currentImage, setCurrentImage] = useState(0);
+	const [playVideo, setPlayVideo] = useState(false);
+	const [playVideoId, setPlayVideoId] = useState("");
+	const params = useParams();
 
 	const handleNext = () => {
 		if (currentImage < bannerData.length - 1) {
@@ -19,6 +23,11 @@ const BannerHome = () => {
 		if (currentImage > 0) {
 			setCurrentImage((preve) => preve - 1);
 		}
+	};
+
+	const handlePlayVideo = (data) => {
+		setPlayVideoId(data);
+		setPlayVideo(true);
 	};
 
 	useEffect(() => {
@@ -79,7 +88,10 @@ const BannerHome = () => {
 										<span>|</span>
 										<p>View: {Number(data.popularity).toFixed(0)}</p>
 									</div>
-									<button className="flex items-center gap-2 bg-white hover:bg-gradient-to-l from-red-700 to-orange-500 px-3 py-2 text-black font-bold rounded mt-4 shadow-md transition-all hover:scale-105">
+									<button
+										onClick={() => handlePlayVideo(data)}
+										className="flex items-center gap-2 bg-white hover:bg-gradient-to-l from-red-700 to-orange-500 px-3 py-2 text-black font-bold rounded mt-4 shadow-md transition-all hover:scale-105"
+									>
 										Play Now <IoPlayCircleSharp className="text-2xl" />
 									</button>
 								</div>
@@ -88,6 +100,14 @@ const BannerHome = () => {
 					);
 				})}
 			</div>
+
+			{playVideo && (
+				<VideoPlay
+					data={playVideoId}
+					close={() => setPlayVideo(false)}
+					media_type={params?.explore}
+				/>
+			)}
 		</section>
 	);
 };
