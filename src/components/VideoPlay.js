@@ -3,7 +3,7 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import useFetchDetails from "../hooks/useFetchDetail";
 
 const VideoPlay = ({ data, close, media_type }) => {
-	const { data: videoData } = useFetchDetails(
+	const { data: videoData, loading } = useFetchDetails(
 		`/${media_type}/${data?.id}/videos`
 	);
 
@@ -20,10 +20,18 @@ const VideoPlay = ({ data, close, media_type }) => {
 					<IoCloseCircleOutline />
 				</button>
 
-				<iframe
-					src={`https://www.youtube.com/embed/${videoData?.results[0]?.key}`}
-					className="w-full h-full"
-				/>
+				{loading ? (
+					<div className="flex justify-center items-center h-full">
+						<span className="text-white">Loading...</span>
+					</div>
+				) : (
+					videoData?.results?.[0]?.key && (
+						<iframe
+							src={`https://www.youtube.com/embed/${videoData.results[0].key}`}
+							className="w-full h-full"
+						/>
+					)
+				)}
 			</div>
 		</section>
 	);
