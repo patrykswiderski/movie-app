@@ -13,11 +13,15 @@ const BannerHome = () => {
 	const [playVideo, setPlayVideo] = useState(false);
 	const [playVideoId, setPlayVideoId] = useState("");
 
-	const handleNext = () => {
-		if (currentImage < bannerData.length - 1) {
-			setCurrentImage((preve) => preve + 1);
-		}
+	const handlePlayVideo = (dataId) => {
+		console.log("Setting playVideoId to:", dataId); // log przed ustawieniem
+		setPlayVideoId(dataId);
+		setPlayVideo(true);
 	};
+
+	useEffect(() => {
+		console.log("playVideoId has been updated to:", playVideoId); // log po aktualizacji stanu
+	}, [playVideoId]);
 
 	const handlePrev = () => {
 		if (currentImage > 0) {
