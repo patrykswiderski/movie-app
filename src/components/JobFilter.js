@@ -33,8 +33,8 @@ const JobFilter = ({ jobName, jobNameSecond = null, castData, label }) => {
 									{crewMember.name}
 								</p>
 								{hoveredCrewId === crewMember.id && (
-									<div className="absolute left-1/2 -translate-x-1/2 -top-56 w-52 h-52 rounded-full z-20 shadow-2xl shadow-neutral-500/50">
-										<div className="relative w-full h-full">
+									<div className="absolute left-1/2 -translate-x-1/2 -top-56 w-52 h-52 rounded-full z-20 shadow-2xl shadow-neutral-500/50 ">
+										<div className="relative w-full h-full ">
 											{crewMember.profile_path ? (
 												<img
 													src={imageURL + crewMember.profile_path}

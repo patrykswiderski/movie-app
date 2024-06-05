@@ -32,14 +32,14 @@ const Card = ({ data, trending, index, media_type }) => {
 					</div>
 				)}
 			</div>
-			<div className="absolute bottom-0 h-16 backdrop-blur-3xl w-full bg-black/60 p-2">
+			<div className="absolute bottom-0 h-16 backdrop-blur-3xl bg-black/60 p-2 w-[102%]">
 				<h2 className="text-ellipsis line-clamp-1 text-lg font-semibold">
 					{data?.title || data?.name}
 				</h2>
 				<div className="text-sm text-neutral-400 flex justify-between items-center">
 					<p>{moment(data?.release_date).format("MMMM Do YYYY")}</p>
 					<div className="flex gap-1 items-baseline bg-black text-neutral-200 px-1 text-sm rounded-full">
-						<IoStar />
+						<IoStar className="mb-1" />
 						<p>{data?.vote_average?.toFixed(1)}</p>
 					</div>
 				</div>

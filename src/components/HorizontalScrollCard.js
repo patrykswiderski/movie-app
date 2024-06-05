@@ -21,7 +21,7 @@ const HorizontalScrollCard = ({ data = [], heading, trending, media_type }) => {
 			<div className="relative">
 				<div
 					ref={containerRef}
-					className="grid grid-cols-[repeat(auto-fit,230px)] grid-flow-col gap-6 overflow-hidden overflow-x-scroll relative z-10 scroll-smooth transition-all scrollbar-none"
+					className="grid grid-cols-[repeat(auto-fit,230px)] grid-flow-col gap-6 overflow-hidden overflow-x-scroll relative z-10 scroll-smooth transition-all scrollbar-none p-2"
 				>
 					{data.map((data, index) => {
 						return (

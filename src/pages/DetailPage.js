@@ -7,6 +7,7 @@ import moment from "moment";
 import Divider from "../components/Divider";
 import JobFilter from "../components/JobFilter";
 import CastList from "../components/CastList";
+import HorizontalScrollCard from "../components/HorizontalScrollCard";
 
 const DetailPage = () => {
 	const params = useParams();
@@ -14,6 +15,9 @@ const DetailPage = () => {
 	const { data } = useFetchDetails(`/${params?.explore}/${params?.id}`);
 	const { data: castData } = useFetchDetails(
 		`/${params?.explore}/${params?.id}/credits`
+	);
+	const { data: similarData } = useFetchDetails(
+		`/${params?.explore}/${params?.id}/similar`
 	);
 
 	const duration = Number(data?.runtime / 60)
@@ -27,11 +31,13 @@ const DetailPage = () => {
 		<div className="h-full">
 			<div className="w-full h-[300px] relative hidden lg:block">
 				<div className="w-full h-full">
-					<img
-						src={imageURL + data?.backdrop_path}
-						alt="movie backdrop image"
-						className="h-full w-full object-cover"
-					/>
+					{data?.backdrop_path !== null ? (
+						<img
+							src={imageURL + data?.backdrop_path}
+							alt="movie backdrop image"
+							className="h-full w-full object-cover"
+						/>
+					) : null}
 				</div>
 
 				<div className="absolute bg-gradient-to-t from-neutral-900/90 to-transparent w-full h-full top-0"></div>
@@ -39,11 +45,17 @@ const DetailPage = () => {
 
 			<div className="container mx-auto px-3 py-16 lg:py-0 flex flex-col lg:flex-row gap-5 lg:gap-10 ">
 				<div className=" relative mx-auto lg:-mt-28 lg:mx-0 w-fit">
-					<img
-						src={imageURL + data?.poster_path}
-						alt="movie poster"
-						className="h-96 w-72 object-cover rounded"
-					/>
+					{data?.poster_path !== null ? (
+						<img
+							src={imageURL + data?.poster_path}
+							alt="movie poster"
+							className="h-96 w-72 object-cover rounded"
+						/>
+					) : (
+						<div className="h-96 w-72 bg-black rounded-lg flex items-center justify-center text-white">
+							Sorry, no image
+						</div>
+					)}
 				</div>
 
 				<div>
@@ -116,6 +128,15 @@ const DetailPage = () => {
 					<CastList castData={castData} />
 				</div>
 			</div>
+			<HorizontalScrollCard
+				data={similarData?.results}
+				heading={
+					params.explore === "tv"
+						? `Similar ${params.explore.toUpperCase()} shows`
+						: `Similar ${params.explore}s`
+				}
+				media_type={params.explore}
+			/>
 		</div>
 	);
 };
