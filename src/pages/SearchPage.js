@@ -18,7 +18,12 @@ const SearchPage = () => {
 				},
 			});
 			setData((prev) => {
-				return [...prev, ...response?.data?.results];
+				const combinedData = [...prev, ...response?.data?.results];
+				const uniqueData = combinedData.filter(
+					(value, index, self) =>
+						index === self.findIndex((t) => t.id === value.id)
+				);
+				return uniqueData;
 			});
 		} catch (error) {
 			console.log("error", error);
@@ -46,7 +51,7 @@ const SearchPage = () => {
 	}, []);
 
 	return (
-		<div className="py-16">
+		<div className="py-16 h-screen">
 			<div className="lg:hidden my-2 mx-2 sticky top-[65px] z-30">
 				<input
 					type="text"

@@ -5,14 +5,14 @@ import { IoSearchOutline } from "react-icons/io5";
 
 export const navigation = [
 	{
-		label: "TV shows",
-		href: "/tv",
-		icon: <PiTelevisionFill />,
-	},
-	{
 		label: "Movies",
 		href: "/movie",
 		icon: <BiSolidMoviePlay />,
+	},
+	{
+		label: "TV shows",
+		href: "/tv",
+		icon: <PiTelevisionFill />,
 	},
 ];
 

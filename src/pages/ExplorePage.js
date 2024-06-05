@@ -17,7 +17,12 @@ const ExplorePage = () => {
 				},
 			});
 			setData((prev) => {
-				return [...prev, ...response?.data?.results];
+				const combinedData = [...prev, ...response?.data?.results];
+				const uniqueData = combinedData.filter(
+					(value, index, self) =>
+						index === self.findIndex((t) => t.id === value.id)
+				);
+				return uniqueData;
 			});
 			setTotalPage(response?.data?.total_pages);
 		} catch (error) {
