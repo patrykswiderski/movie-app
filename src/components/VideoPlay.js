@@ -14,7 +14,7 @@ const VideoPlay = ({ data, close, media_type }) => {
 		if (videoData) {
 			const timer = setTimeout(() => {
 				setIsReady(true);
-			}, 1000); // Czeka 1 sekundę na dane
+			}, 300); // Czeka 1 sekundę na dane
 
 			return () => clearTimeout(timer); // Czyści timer, jeśli komponent zostanie odmontowany
 		}
