@@ -4,7 +4,7 @@ import useFetchDetails from "../hooks/useFetchDetail";
 
 const VideoPlay = ({ data, close, media_type }) => {
 	const { data: videoData } = useFetchDetails(
-		`/${media_type}/${data?.id}/videos`
+		`/${data.media_type}/${data?.id}/videos`
 	);
 	const [isReady, setIsReady] = useState(false);
 
