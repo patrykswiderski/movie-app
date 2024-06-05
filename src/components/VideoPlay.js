@@ -9,6 +9,7 @@ const VideoPlay = ({ data, close, media_type }) => {
 
 	console.log("dataVideo", data);
 	console.log("videoData", videoData);
+	console.log("youtubkey", videoData?.results[0]?.key);
 	return (
 		<section className="fixed bg-neutral-700 top-0 bottom-0 right-0 left-0 z-40 bg-opacity-50 flex justify-center items-center">
 			<div className="bg-black w-full max-h-[80vh] max-w-screen-lg aspect-video rounded overflow-hidden relative">
