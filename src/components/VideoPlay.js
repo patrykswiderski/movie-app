@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import useFetchDetails from "../hooks/useFetchDetail";
 
 const VideoPlay = ({ data, close, media_type }) => {
-	const { data: videoData, loading } = useFetchDetails(
+	const { data: videoData } = useFetchDetails(
 		`/${media_type}/${data?.id}/videos`
 	);
+	const [isReady, setIsReady] = useState(false);
+
+	useEffect(() => {
+		if (videoData) {
+			const timer = setTimeout(() => {
+				setIsReady(true);
+			}, 1000); // Czeka 1 sekundę na dane
+
+			return () => clearTimeout(timer); // Czyści timer, jeśli komponent zostanie odmontowany
+		}
+	}, [videoData]);
 
 	console.log("dataVideoPlay", data);
 	console.log("videoDataPlay", videoData);
@@ -20,9 +31,9 @@ const VideoPlay = ({ data, close, media_type }) => {
 					<IoCloseCircleOutline />
 				</button>
 
-				{loading ? (
+				{!isReady ? (
 					<div className="flex justify-center items-center h-full">
-						<span className="text-white">Loading...</span>
+						<span className="text-white">Ładowanie...</span>
 					</div>
 				) : (
 					videoData?.results?.[0]?.key && (
