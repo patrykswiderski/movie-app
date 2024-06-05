@@ -53,7 +53,7 @@ const ExplorePage = () => {
 	return (
 		<div className="py-16">
 			<div className="container mx-auto">
-				<h3 className="text-lg lg:text-3xl font-semibold px-3 my-3">
+				<h3 className="text-lg lg:text-3xl font-semibold px-3 my-3 capitalize">
 					Popular
 					{params.explore === "tv"
 						? ` ${params.explore.toUpperCase()} shows`

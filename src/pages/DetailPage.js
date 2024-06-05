@@ -11,7 +11,7 @@ import HorizontalScrollCard from "../components/HorizontalScrollCard";
 
 const DetailPage = () => {
 	const params = useParams();
-	const imageURL = useSelector((state) => state.movieflixData.imageURL);
+	const imageURL = useSelector((state) => state?.movieflixData?.imageURL);
 	const { data } = useFetchDetails(`/${params?.explore}/${params?.id}`);
 	const { data: castData } = useFetchDetails(
 		`/${params?.explore}/${params?.id}/credits`
@@ -82,16 +82,18 @@ const DetailPage = () => {
 					</div>
 
 					<div className="text-neutral-400 text-sm pt-2 flex flex-wrap items-center gap-3">
-						{data?.genres.map((genre, index) => {
-							return (
-								<div
-									className="bg-transparent px-2 py-1 text-sm rounded-full border border-neutral-300 whitespace-nowrap"
-									key={genre + index}
-								>
-									{genre.name !== "" || genre.name !== ";" ? genre.name : null}
-								</div>
-							);
-						})}
+						{data?.genres?.length > 0
+							? data.genres.map((genre, index) => {
+									return (
+										<div
+											className="bg-transparent px-2 py-1 text-sm rounded-full border border-neutral-300 whitespace-nowrap"
+											key={genre.id ?? index} // Użyj id, jeśli dostępne, jako klucz
+										>
+											{genre.name && genre.name !== ";" ? genre.name : null}
+										</div>
+									);
+							  })
+							: null}
 					</div>
 					<p className="text-neutral-300 py-2 lg:w-[50vw]">{data?.overview}</p>
 
