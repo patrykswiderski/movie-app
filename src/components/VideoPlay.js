@@ -4,7 +4,7 @@ import useFetchDetails from "../hooks/useFetchDetail";
 
 const VideoPlay = ({ data, close, media_type }) => {
 	const { data: videoData } = useFetchDetails(
-		`/${data.media_type}/${data?.id}/videos`
+		`/${data?.media_type}/${data?.id}/videos`
 	);
 	const [isReady, setIsReady] = useState(false);
 
@@ -33,7 +33,7 @@ const VideoPlay = ({ data, close, media_type }) => {
 
 				{!isReady ? (
 					<div className="flex justify-center items-center h-full">
-						<span className="text-white">Ładowanie...</span>
+						<span className="text-white">Loading...</span>
 					</div>
 				) : (
 					videoData?.results?.[0]?.key && (
