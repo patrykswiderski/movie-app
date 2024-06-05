@@ -4,7 +4,6 @@ import { IoPlayCircleSharp } from "react-icons/io5";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
 import { Link, useParams } from "react-router-dom";
 import VideoPlay from "./VideoPlay";
-import useFetchDetails from "../hooks/useFetchDetail";
 
 const BannerHome = () => {
 	const params = useParams();
@@ -28,8 +27,8 @@ const BannerHome = () => {
 
 	console.log("dataBanner", bannerData);
 
-	const handlePlayVideo = (bannerData) => {
-		setPlayVideoId(bannerData);
+	const handlePlayVideo = (dataId) => {
+		setPlayVideoId(dataId);
 		setPlayVideo(true);
 	};
 
