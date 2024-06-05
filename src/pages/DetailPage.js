@@ -33,6 +33,7 @@ const DetailPage = () => {
 
 	console.log("data", data);
 	console.log("cast", castData);
+	console.log("dataBanner", data);
 
 	const handlePlayVideo = (data) => {
 		setPlayVideoId(data);

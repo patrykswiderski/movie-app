@@ -8,11 +8,9 @@ import useFetchDetails from "../hooks/useFetchDetail";
 
 const BannerHome = () => {
 	const params = useParams();
-
 	const bannerData = useSelector((state) => state.movieflixData.bannerData);
 	const imageURL = useSelector((state) => state.movieflixData.imageURL);
 	const { data } = useFetchDetails(`/${params?.explore}/${params?.id}`);
-
 	const [currentImage, setCurrentImage] = useState(0);
 	const [playVideo, setPlayVideo] = useState(false);
 	const [playVideoId, setPlayVideoId] = useState("");
