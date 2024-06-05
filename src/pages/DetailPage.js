@@ -169,7 +169,11 @@ const DetailPage = () => {
 				media_type={params.explore}
 			/>
 			{playVideo && (
-				<VideoPlay videoId={playVideoId} close={() => setPlayVideo(false)} />
+				<VideoPlay
+					data={playVideoId}
+					close={() => setPlayVideo(false)}
+					media_type={params?.explore}
+				/>
 			)}
 		</div>
 	);
