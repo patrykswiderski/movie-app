@@ -7,7 +7,7 @@ const VideoPlay = ({ data, close, media_type }) => {
 		`/${media_type}/${data?.id}/videos`
 	);
 
-	console.log("dataVideo", data);
+	console.log("dataVideoPlay", data);
 	console.log("videoData", videoData);
 
 	return (
