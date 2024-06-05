@@ -28,8 +28,8 @@ const BannerHome = () => {
 	const handlePlayVideo = (dataId) => {
 		setPlayVideoId(dataId);
 		setPlayVideo(true);
+		console.log("dataPlayVideoId", playVideoId);
 	};
-	console.log("dataBanner", playVideoId);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
