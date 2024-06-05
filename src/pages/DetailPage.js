@@ -34,8 +34,8 @@ const DetailPage = () => {
 	console.log("dataDetail", data);
 	console.log("castDetail", castData);
 
-	const handlePlayVideo = (data) => {
-		setPlayVideoId(data);
+	const handlePlayVideo = (dataId) => {
+		setPlayVideoId(dataId);
 		setPlayVideo(true);
 	};
 
