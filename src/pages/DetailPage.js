@@ -31,8 +31,8 @@ const DetailPage = () => {
 		.toFixed(1)
 		.split(".");
 
-	console.log("data", data);
-	console.log("cast", castData);
+	console.log("dataDetail", data);
+	console.log("castDetail", castData);
 	console.log("dataBanner", data);
 
 	const handlePlayVideo = (data) => {
