@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import useFetchDetails from "../hooks/useFetchDetail";
 import { useSelector } from "react-redux";
@@ -23,6 +23,9 @@ const DetailPage = () => {
 		`/${params?.explore}/${params?.id}/recommendations`
 	);
 
+	const [playVideo, setVideoId] = useState(false);
+	const [playVideoId, setPlayVideoId] = useState("");
+
 	const duration = Number(data?.runtime / 60)
 		.toFixed(1)
 		.split(".");
@@ -41,16 +44,13 @@ const DetailPage = () => {
 							className="h-full w-full object-cover"
 						/>
 					) : null}
-					<button className="mt-3 w-full py-2 px-4 text-center bg-white text-black rounded">
-						Play Now
-					</button>
 				</div>
 
 				<div className="absolute bg-gradient-to-t from-neutral-900/90 to-transparent w-full h-full top-0"></div>
 			</div>
 
 			<div className="container mx-auto px-3 py-16 lg:py-0 flex flex-col lg:flex-row gap-5 lg:gap-10 ">
-				<div className=" relative mx-auto lg:-mt-28 lg:mx-0 w-fit">
+				<div className=" relative mx-auto lg:-mt-28 lg:mx-0 w-fit min-w-60">
 					{data?.poster_path !== null ? (
 						<img
 							src={imageURL + data?.poster_path}
@@ -62,6 +62,9 @@ const DetailPage = () => {
 							Sorry, no image
 						</div>
 					)}
+					<button className="mt-3 w-full py-2 px-4 text-center bg-white text-black rounded font-bold text-lg hover:bg-gradient-to-l from-red-700 to-orange-500 hover:scale-105 transition-all">
+						Play Now
+					</button>
 				</div>
 
 				<div>

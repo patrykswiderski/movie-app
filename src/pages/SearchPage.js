@@ -2,21 +2,20 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Card from "../components/Card";
-import useDebounce from "../hooks/useDebounce";
 
 const SearchPage = () => {
 	const location = useLocation();
 	const [data, setData] = useState([]);
 	const [page, setPage] = useState(1);
-	const [query, setQuery] = useState("");
 	const navigate = useNavigate();
-	const debouncedQuery = useDebounce(query, 500);
+
+	const query = location?.search?.slice(3);
 
 	const fetchData = async () => {
 		try {
 			const response = await axios.get("/search/multi", {
 				params: {
-					query: debouncedQuery,
+					query: query,
 					page: page,
 				},
 			});
@@ -34,12 +33,12 @@ const SearchPage = () => {
 	};
 
 	useEffect(() => {
-		if (debouncedQuery) {
+		if (query) {
 			setPage(1);
 			setData([]);
 			fetchData();
 		}
-	}, [debouncedQuery]);
+	}, [location?.search]);
 
 	const handleScroll = () => {
 		if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
@@ -48,22 +47,14 @@ const SearchPage = () => {
 	};
 
 	useEffect(() => {
-		if (debouncedQuery) {
+		if (query) {
 			fetchData();
 		}
 	}, [page]);
 
 	useEffect(() => {
 		window.addEventListener("scroll", handleScroll);
-		return () => {
-			window.removeEventListener("scroll", handleScroll);
-		};
 	}, []);
-
-	const handleInputChange = (e) => {
-		setQuery(e.target.value);
-		navigate(`/search?q=${e.target.value}`);
-	};
 
 	return (
 		<div className="py-16 h-screen">
@@ -71,7 +62,7 @@ const SearchPage = () => {
 				<input
 					type="text"
 					placeholder="Search here..."
-					onChange={handleInputChange}
+					onChange={(e) => navigate(`/search?q=${e.target.value}`)}
 					className="px-4 py-2 w-full text-lg bg-neutral-100 text-neutral-900 rounded-full outline-none border-none"
 				/>
 			</div>
