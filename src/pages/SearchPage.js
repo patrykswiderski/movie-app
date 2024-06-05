@@ -1,22 +1,22 @@
 import axios from "axios";
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Card from "../components/Card";
-import _ from "lodash";
+import useDebounce from "../hooks/useDebounce";
 
 const SearchPage = () => {
 	const location = useLocation();
 	const [data, setData] = useState([]);
 	const [page, setPage] = useState(1);
+	const [query, setQuery] = useState("");
 	const navigate = useNavigate();
-
-	const query = location?.search?.slice(3);
+	const debouncedQuery = useDebounce(query, 500);
 
 	const fetchData = async () => {
 		try {
 			const response = await axios.get("/search/multi", {
 				params: {
-					query: query,
+					query: debouncedQuery,
 					page: page,
 				},
 			});
@@ -34,12 +34,12 @@ const SearchPage = () => {
 	};
 
 	useEffect(() => {
-		if (query) {
+		if (debouncedQuery) {
 			setPage(1);
 			setData([]);
 			fetchData();
 		}
-	}, [location?.search]);
+	}, [debouncedQuery]);
 
 	const handleScroll = () => {
 		if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
@@ -48,7 +48,7 @@ const SearchPage = () => {
 	};
 
 	useEffect(() => {
-		if (query) {
+		if (debouncedQuery) {
 			fetchData();
 		}
 	}, [page]);
@@ -60,18 +60,9 @@ const SearchPage = () => {
 		};
 	}, []);
 
-	const debouncedNavigate = useCallback(
-		_.debounce((value) => {
-			console.log("Navigating to: ", value);
-			navigate(`/search?q=${value}`);
-		}, 750),
-		[navigate]
-	);
-
 	const handleInputChange = (e) => {
-		console.log("Input changed: ", e.target.value);
-
-		debouncedNavigate(e.target.value);
+		setQuery(e.target.value);
+		navigate(`/search?q=${e.target.value}`);
 	};
 
 	return (

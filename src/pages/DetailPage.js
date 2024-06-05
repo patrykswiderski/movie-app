@@ -41,6 +41,9 @@ const DetailPage = () => {
 							className="h-full w-full object-cover"
 						/>
 					) : null}
+					<button className="mt-3 w-full py-2 px-4 text-center bg-white text-black rounded">
+						Play Now
+					</button>
 				</div>
 
 				<div className="absolute bg-gradient-to-t from-neutral-900/90 to-transparent w-full h-full top-0"></div>
@@ -113,7 +116,7 @@ const DetailPage = () => {
 						) : null}
 						{data?.status === "Released" ? (
 							<p>
-								Release date:
+								Date:
 								<span className="text-neutral-400 font-normal">
 									{"\u0020" + moment(data?.release_date).format("MMMM Do YYYY")}
 								</span>
