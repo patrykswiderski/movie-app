@@ -106,7 +106,12 @@ const DetailPage = () => {
 
 					<JobFilter jobName="Director" castData={castData} label="Director" />
 					<Divider />
-					<JobFilter jobName="Writer" castData={castData} label="Writers" />
+					<JobFilter
+						jobName={"Writer"}
+						jobNameSecond={"Screenplay"}
+						castData={castData}
+						label="Writers"
+					/>
 					<Divider />
 					<CastList castData={castData} />
 				</div>

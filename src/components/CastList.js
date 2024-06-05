@@ -36,15 +36,15 @@ const CastList = ({ castData }) => {
 									{castMember.name}
 								</p>
 								{hoveredCastId === castMember.id && (
-									<div className="absolute left-1/2 -translate-x-1/2 -top-60 w-max h-56 rounded-lg z-20 shadow-xl shadow-neutral-600/50">
+									<div className="absolute left-1/2 -translate-x-1/2 -top-56 w-52 h-52 rounded-full z-20 shadow-2xl shadow-neutral-500/50">
 										{castMember.profile_path ? (
 											<img
 												src={imageURL + castMember.profile_path}
 												alt="cast member"
-												className="h-full w-full object-contain rounded-2xl"
+												className="h-full w-full object-cover rounded-full"
 											/>
 										) : (
-											<div className="h-full w-full bg-neutral-800 rounded-2xl p-2 flex items-center justify-center text-white">
+											<div className="h-full w-full bg-neutral-900 rounded-full p-2 flex items-center justify-center text-white">
 												Sorry, no image
 											</div>
 										)}
@@ -57,17 +57,17 @@ const CastList = ({ castData }) => {
 					{castData?.cast.length > 3 && !showAll && (
 						<button
 							onClick={handleToggleShowAll}
-							className="ml-2 hover:text-white"
+							className="ml-2 hover:text-white text-sm"
 						>
-							...
+							. . .
 						</button>
 					)}
 					{showAll && (
 						<button
 							onClick={handleToggleShowAll}
-							className="ml-2 hover:text-white border text-sm border-neutral-500 hover:border-white rounded-full px-3"
+							className="ml-2 hover:text-white text-sm "
 						>
-							... show less
+							. . . show less
 						</button>
 					)}
 				</div>
