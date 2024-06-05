@@ -24,7 +24,7 @@ const DetailPage = () => {
 	console.log("cast", castData);
 
 	return (
-		<div className="h-min-screen h-max-full">
+		<div className="h-full">
 			<div className="w-full h-[300px] relative hidden lg:block">
 				<div className="w-full h-full">
 					<img
@@ -70,7 +70,7 @@ const DetailPage = () => {
 						{data?.genres.map((genre, index) => {
 							return (
 								<div
-									className="bg-transparent px-2 py-1 text-sm rounded-full border border-neutral-400"
+									className="bg-transparent px-2 py-1 text-sm rounded-full border border-neutral-300"
 									key={genre + index}
 								>
 									{genre.name !== "" || genre.name !== ";" ? genre.name : null}
@@ -82,21 +82,32 @@ const DetailPage = () => {
 
 					<Divider />
 
-					<div className="flex items-center text-neutral-400 gap-2">
-						<p>Status: {data?.status}</p>
-						{data?.status === "Released" ? <span>{"\u00B7"}</span> : null}
+					<div className="flex items-center font-bold gap-2">
+						<p>
+							Status:
+							<span className="text-neutral-400 font-normal">
+								{"\u0020" + data?.status}
+							</span>
+						</p>
+						{data?.status === "Released" ? (
+							<span className="text-neutral-400 font-normal">{"\u00B7"}</span>
+						) : null}
 						{data?.status === "Released" ? (
 							<p>
-								Release date:{" "}
-								{moment(data?.release_date).format("MMMM Do YYYY")}
+								Release date:
+								<span className="text-neutral-400 font-normal">
+									{"\u0020" + moment(data?.release_date).format("MMMM Do YYYY")}
+								</span>
 							</p>
 						) : null}
 					</div>
 
+					<Divider />
+
 					<JobFilter jobName="Director" castData={castData} label="Director" />
-
+					<Divider />
 					<JobFilter jobName="Writer" castData={castData} label="Writers" />
-
+					<Divider />
 					<CastList castData={castData} />
 				</div>
 			</div>

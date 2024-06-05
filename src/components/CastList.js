@@ -1,29 +1,63 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const CastList = ({ castData }) => {
 	const [showAll, setShowAll] = useState(false);
+	const [hoveredCastId, setHoveredCastId] = useState(null);
+	const imageURL = useSelector((state) => state.movieflixData.imageURL);
 
 	const handleToggleShowAll = () => {
 		setShowAll(!showAll);
 	};
 
+	const handleMouseEnter = (castId) => {
+		setHoveredCastId(castId);
+	};
+
+	const handleMouseLeave = () => {
+		setHoveredCastId(null);
+	};
+
 	const visibleCast = showAll ? castData?.cast : castData?.cast.slice(0, 3);
 
 	return (
-		<div className="w-[80vw] lg:w-[50vw] h-full">
+		<div className="w-[80vw] lg:w-[50vw] h-max">
 			<div className="flex gap-2 pb-2">
-				<p>Stars:</p>
+				<p className="font-bold">Stars:</p>
 				<div className="flex flex-wrap gap-2 h-full">
 					{visibleCast?.map((castMember, index, array) => (
 						<React.Fragment key={castMember.id + index}>
-							<p className="">{castMember.name}</p>
+							<div className="relative">
+								<p
+									className="text-neutral-400 cursor-pointer hover:text-white"
+									onMouseEnter={() => handleMouseEnter(castMember.id)}
+									onMouseLeave={handleMouseLeave}
+								>
+									{castMember.name}
+								</p>
+								{hoveredCastId === castMember.id && (
+									<div className="absolute left-1/2 -translate-x-1/2 -top-60 w-max h-56 rounded-lg z-20 shadow-xl shadow-neutral-600/50">
+										{castMember.profile_path ? (
+											<img
+												src={imageURL + castMember.profile_path}
+												alt="cast member"
+												className="h-full w-full object-contain rounded-2xl"
+											/>
+										) : (
+											<div className="h-full w-full bg-neutral-800 rounded-2xl p-2 flex items-center justify-center text-white">
+												Sorry, no image
+											</div>
+										)}
+									</div>
+								)}
+							</div>
 							{index < array.length - 1 && <span>{"\u00B7"}</span>}
 						</React.Fragment>
 					))}
 					{castData?.cast.length > 3 && !showAll && (
 						<button
 							onClick={handleToggleShowAll}
-							className="ml-2  hover:text-white"
+							className="ml-2 hover:text-white"
 						>
 							...
 						</button>
