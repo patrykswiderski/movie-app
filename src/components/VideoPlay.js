@@ -19,6 +19,7 @@ const VideoPlay = ({ data, close, media_type }) => {
 
 				<iframe
 					src={`https://www.youtube.com/watch?v=${videoData?.results[0]?.key}`}
+					className="w-full h-full"
 				/>
 			</div>
 		</section>
