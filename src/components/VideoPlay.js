@@ -3,8 +3,10 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import useFetchDetails from "../hooks/useFetchDetail";
 
 const VideoPlay = ({ data, close, media_type }) => {
+	const mediaType = data?.media_type || media_type;
+
 	const { data: videoData } = useFetchDetails(
-		`/${data?.media_type}/${data?.id}/videos`
+		`/${mediaType}/${data?.id}/videos`
 	);
 	const [isReady, setIsReady] = useState(false);
 
