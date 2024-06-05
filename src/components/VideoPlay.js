@@ -1,9 +1,11 @@
 import React from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
-import useFetch from "../hooks/useFetch";
+import useFetchDetails from "../hooks/useFetchDetail";
 
 const VideoPlay = ({ data, close, media_type }) => {
-	const { data: videoData } = useFetch(`/${media_type}/${data?.id}/videos`);
+	const { data: videoData } = useFetchDetails(
+		`/${media_type}/${data?.id}/videos`
+	);
 
 	console.log("dataVideo", data);
 	console.log("videoData", videoData);
@@ -18,7 +20,7 @@ const VideoPlay = ({ data, close, media_type }) => {
 				</button>
 
 				<iframe
-					src={`https://www.youtube.com/embed/watch?v=${videoData?.results?.key}`}
+					src={`https://www.youtube.com/embed/watch?v=${videoData?.results[0]?.key}`}
 					className="w-full h-full"
 				/>
 			</div>
