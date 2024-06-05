@@ -38,8 +38,8 @@ const Card = ({ data, trending, index, media_type }) => {
 				</h2>
 				<div className="text-sm text-neutral-400 flex justify-between items-center">
 					<p>{moment(data?.release_date).format("MMMM Do YYYY")}</p>
-					<div className="flex gap-1 items-center bg-black text-neutral-200 px-2 text-sm rounded-full">
-						<IoStar className="mb-1" />
+					<div className="flex gap-1 items-center bg-black text-neutral-200 px-2 py-0.5 text-sm rounded-full">
+						<IoStar className="mb-0.5" />
 						<p className="font-light">{data?.vote_average?.toFixed(1)}</p>
 					</div>
 				</div>
