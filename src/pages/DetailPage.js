@@ -87,9 +87,11 @@ const DetailPage = () => {
 									return (
 										<div
 											className="bg-transparent px-2 py-1 text-sm rounded-full border border-neutral-300 whitespace-nowrap"
-											key={genre.id ?? index} // Użyj id, jeśli dostępne, jako klucz
+											key={genre.id + index}
 										>
-											{genre.name && genre.name !== ";" ? genre.name : null}
+											{genre.name !== "" || genre.name !== ";"
+												? genre.name
+												: null}{" "}
 										</div>
 									);
 							  })
