@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Card from "../components/Card";
+import _ from "lodash";
 
 const SearchPage = () => {
 	const location = useLocation();
@@ -9,11 +10,13 @@ const SearchPage = () => {
 	const [page, setPage] = useState(1);
 	const navigate = useNavigate();
 
+	const query = location?.search?.slice(3);
+
 	const fetchData = async () => {
 		try {
 			const response = await axios.get("/search/multi", {
 				params: {
-					query: location?.search?.slice(3),
+					query: query,
 					page: page,
 				},
 			});
@@ -31,9 +34,11 @@ const SearchPage = () => {
 	};
 
 	useEffect(() => {
-		setPage(1);
-		setData([]);
-		fetchData();
+		if (query) {
+			setPage(1);
+			setData([]);
+			fetchData();
+		}
 	}, [location?.search]);
 
 	const handleScroll = () => {
@@ -43,12 +48,31 @@ const SearchPage = () => {
 	};
 
 	useEffect(() => {
-		fetchData();
+		if (query) {
+			fetchData();
+		}
 	}, [page]);
 
 	useEffect(() => {
 		window.addEventListener("scroll", handleScroll);
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
 	}, []);
+
+	const debouncedNavigate = useCallback(
+		_.debounce((value) => {
+			console.log("Navigating to: ", value);
+			navigate(`/search?q=${value}`);
+		}, 750),
+		[navigate]
+	);
+
+	const handleInputChange = (e) => {
+		console.log("Input changed: ", e.target.value);
+
+		debouncedNavigate(e.target.value);
+	};
 
 	return (
 		<div className="py-16 h-screen">
@@ -56,7 +80,7 @@ const SearchPage = () => {
 				<input
 					type="text"
 					placeholder="Search here..."
-					onChange={(e) => navigate(`/search?q=${e.target.value}`)}
+					onChange={handleInputChange}
 					className="px-4 py-2 w-full text-lg bg-neutral-100 text-neutral-900 rounded-full outline-none border-none"
 				/>
 			</div>

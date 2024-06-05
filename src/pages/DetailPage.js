@@ -19,13 +19,16 @@ const DetailPage = () => {
 	const { data: similarData } = useFetchDetails(
 		`/${params?.explore}/${params?.id}/similar`
 	);
+	const { data: recommendedData } = useFetchDetails(
+		`/${params?.explore}/${params?.id}/recommendations`
+	);
 
 	const duration = Number(data?.runtime / 60)
 		.toFixed(1)
 		.split(".");
 
-	console.log("data", data);
-	console.log("cast", castData);
+	// console.log("data", similarData);
+	// console.log("cast", recommendedData);
 
 	return (
 		<div className="h-full">
@@ -78,11 +81,11 @@ const DetailPage = () => {
 						) : null}
 					</div>
 
-					<div className="text-neutral-400 text-sm pt-2 flex items-center gap-3">
+					<div className="text-neutral-400 text-sm pt-2 flex flex-wrap items-center gap-3">
 						{data?.genres.map((genre, index) => {
 							return (
 								<div
-									className="bg-transparent px-2 py-1 text-sm rounded-full border border-neutral-300"
+									className="bg-transparent px-2 py-1 text-sm rounded-full border border-neutral-300 whitespace-nowrap"
 									key={genre + index}
 								>
 									{genre.name !== "" || genre.name !== ";" ? genre.name : null}
@@ -134,6 +137,15 @@ const DetailPage = () => {
 					params.explore === "tv"
 						? `Similar ${params.explore.toUpperCase()} shows`
 						: `Similar ${params.explore}s`
+				}
+				media_type={params.explore}
+			/>
+			<HorizontalScrollCard
+				data={recommendedData?.results}
+				heading={
+					params.explore === "tv"
+						? `Recommended ${params.explore.toUpperCase()} shows`
+						: `Recommended ${params.explore}s`
 				}
 				media_type={params.explore}
 			/>

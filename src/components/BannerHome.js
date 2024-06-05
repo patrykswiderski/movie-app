@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { IoPlayCircleSharp } from "react-icons/io5";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const BannerHome = () => {
 	const bannerData = useSelector((state) => state.movieflixData.bannerData);
@@ -64,9 +65,12 @@ const BannerHome = () => {
 
 							<div className="container mx-auto">
 								<div className="w-full absolute bottom-0 max-w-md px-3">
-									<h2 className="font-bold text-2xl lg:text-4xl text-white drop-shadow-3xl">
+									<Link
+										to={"/" + data.media_type + "/" + data.id}
+										className="font-bold text-2xl lg:text-4xl text-white drop-shadow-3xl"
+									>
 										{data?.title ?? data?.name}
-									</h2>
+									</Link>
 									<p className="text-ellipsis line-clamp-3 my-2">
 										{data?.overview}
 									</p>
