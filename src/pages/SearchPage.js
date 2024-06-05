@@ -62,12 +62,15 @@ const SearchPage = () => {
 
 	const debouncedNavigate = useCallback(
 		_.debounce((value) => {
+			console.log("Navigating to: ", value);
 			navigate(`/search?q=${value}`);
-		}, 1000),
+		}, 750),
 		[navigate]
 	);
 
 	const handleInputChange = (e) => {
+		console.log("Input changed: ", e.target.value);
+
 		debouncedNavigate(e.target.value);
 	};
 

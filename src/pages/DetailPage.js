@@ -27,8 +27,8 @@ const DetailPage = () => {
 		.toFixed(1)
 		.split(".");
 
-	// console.log("data", similarData);
-	// console.log("cast", recommendedData);
+	console.log("data", data);
+	console.log("cast", castData);
 
 	return (
 		<div className="h-full">

@@ -25,7 +25,6 @@ const Card = ({ data, trending, index, media_type }) => {
 				</div>
 			)}
 			<div className="absolute top-3">
-				{" "}
 				{trending && (
 					<div className="py-1 px-4 backdrop-blur-3xl rounded-r-full bg-black/60 overflow-hidden">
 						#{index} Trending
