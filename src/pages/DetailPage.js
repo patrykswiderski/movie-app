@@ -8,6 +8,7 @@ import Divider from "../components/Divider";
 import JobFilter from "../components/JobFilter";
 import CastList from "../components/CastList";
 import HorizontalScrollCard from "../components/HorizontalScrollCard";
+import VideoPlay from "../components/VideoPlay";
 
 const DetailPage = () => {
 	const params = useParams();
@@ -23,7 +24,7 @@ const DetailPage = () => {
 		`/${params?.explore}/${params?.id}/recommendations`
 	);
 
-	const [playVideo, setVideoId] = useState(false);
+	const [playVideo, setPlayVideo] = useState(false);
 	const [playVideoId, setPlayVideoId] = useState("");
 
 	const duration = Number(data?.runtime / 60)
@@ -32,6 +33,11 @@ const DetailPage = () => {
 
 	console.log("data", data);
 	console.log("cast", castData);
+
+	const handlePlayVideo = (data) => {
+		setPlayVideoId(data?.id);
+		setPlayVideo(true);
+	};
 
 	return (
 		<div className="h-full">
@@ -62,7 +68,10 @@ const DetailPage = () => {
 							Sorry, no image
 						</div>
 					)}
-					<button className="mt-3 w-full py-2 px-4 text-center bg-white text-black rounded font-bold text-lg hover:bg-gradient-to-l from-red-700 to-orange-500 hover:scale-105 transition-all">
+					<button
+						onClick={() => handlePlayVideo(data)}
+						className="mt-3 w-full py-2 px-4 text-center bg-white text-black rounded font-bold text-lg hover:bg-gradient-to-l from-red-700 to-orange-500 hover:scale-105 transition-all"
+					>
 						Play Now
 					</button>
 				</div>
@@ -159,6 +168,9 @@ const DetailPage = () => {
 				}
 				media_type={params.explore}
 			/>
+			{playVideo && (
+				<VideoPlay videoId={playVideoId} close={() => setPlayVideo(false)} />
+			)}
 		</div>
 	);
 };

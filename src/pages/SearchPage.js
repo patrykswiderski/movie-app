@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import _ from "lodash";
 import Card from "../components/Card";
 
 const SearchPage = () => {
@@ -11,12 +12,12 @@ const SearchPage = () => {
 
 	const query = location?.search?.slice(3);
 
-	const fetchData = async () => {
+	const fetchData = async (searchQuery, searchPage) => {
 		try {
 			const response = await axios.get("/search/multi", {
 				params: {
-					query: query,
-					page: page,
+					query: searchQuery,
+					page: searchPage,
 				},
 			});
 			setData((prev) => {
@@ -32,11 +33,19 @@ const SearchPage = () => {
 		}
 	};
 
+	const debouncedFetchData = useCallback(
+		_.debounce(
+			(searchQuery, searchPage) => fetchData(searchQuery, searchPage),
+			500
+		),
+		[]
+	);
+
 	useEffect(() => {
 		if (query) {
 			setPage(1);
 			setData([]);
-			fetchData();
+			debouncedFetchData(query, 1);
 		}
 	}, [location?.search]);
 
@@ -47,13 +56,14 @@ const SearchPage = () => {
 	};
 
 	useEffect(() => {
-		if (query) {
-			fetchData();
+		if (query && page > 1) {
+			debouncedFetchData(query, page);
 		}
 	}, [page]);
 
 	useEffect(() => {
 		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
 	return (
