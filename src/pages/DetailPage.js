@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useFetchDetails from "../hooks/useFetchDetail";
 import { useSelector } from "react-redux";
@@ -35,6 +35,10 @@ const DetailPage = () => {
 		setPlayVideoId(data);
 		setPlayVideo(true);
 	};
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 
 	return (
 		<div className="h-full">
