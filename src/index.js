@@ -12,19 +12,16 @@ import { store } from "./store/store";
 
 axios.defaults.baseURL = "https://api.themoviedb.org/3";
 axios.defaults.headers.common[
-  "Authorization"
+	"Authorization"
 ] = `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
-  </React.StrictMode>
+	<React.StrictMode>
+		<Provider store={store}>
+			<RouterProvider router={router} />
+		</Provider>
+	</React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
