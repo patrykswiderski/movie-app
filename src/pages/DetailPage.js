@@ -61,7 +61,7 @@ const DetailPage = () => {
 					{data?.poster_path !== null ? (
 						<img
 							src={imageURL + data?.poster_path}
-							alt="movie poster"
+							alt={`${data?.title || data?.name} poster`}
 							className="h-96 w-72 object-cover rounded"
 						/>
 					) : (
@@ -72,13 +72,14 @@ const DetailPage = () => {
 					<button
 						onClick={() => handlePlayVideo(data)}
 						className="mt-3 w-full py-2 px-4 text-center bg-white text-black rounded font-bold text-lg hover:bg-gradient-to-l from-red-700 to-orange-500 hover:scale-105 transition-all"
+						aria-label={`Play video for ${data?.title || data?.name}`}
 					>
 						Play Now
 					</button>
 				</div>
 
 				<div>
-					<h2 className="text-xl font-bold text-white">
+					<h2 className="text-xl font-bold text-white" tabIndex="0">
 						{data?.title || data?.name}
 					</h2>
 					<p className="text-neutral-300">{data?.tagline}</p>
@@ -113,7 +114,9 @@ const DetailPage = () => {
 							  })
 							: null}
 					</div>
-					<p className="text-neutral-300 py-2 lg:w-[50vw]">{data?.overview}</p>
+					<p className="text-neutral-300 py-2 lg:w-[50vw]" tabIndex="0">
+						{data?.overview}
+					</p>
 
 					<Divider />
 
@@ -159,6 +162,7 @@ const DetailPage = () => {
 						: `Similar ${params.explore}s`
 				}
 				media_type={params.explore}
+				aria-label={`Recommended ${params.explore} results`}
 			/>
 			<HorizontalScrollCard
 				data={recommendedData?.results}
@@ -168,12 +172,14 @@ const DetailPage = () => {
 						: `Recommended ${params.explore}s`
 				}
 				media_type={params.explore}
+				aria-label={`Recommended ${params.explore} results`}
 			/>
 			{playVideo && (
 				<VideoPlay
 					data={playVideoId}
 					close={() => setPlayVideo(false)}
 					media_type={params?.explore}
+					aria-label="Close video player"
 				/>
 			)}
 		</div>

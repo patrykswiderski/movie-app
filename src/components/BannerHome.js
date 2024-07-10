@@ -48,7 +48,7 @@ const BannerHome = () => {
 	}, [playVideo, handleNext]);
 
 	return (
-		<section className="w-full h-full">
+		<section className="w-full h-full" aria-label="Banner section">
 			<div className="flex min-h-full max-h-[95vh] overflow-hidden">
 				{bannerData.map((data, index) => (
 					<div
@@ -59,7 +59,7 @@ const BannerHome = () => {
 						<div className="w-full h-full">
 							<img
 								src={imageURL + data.backdrop_path}
-								alt="banner"
+								alt={`${data?.title ?? data?.name} banner`}
 								className="h-full w-full object-cover"
 							/>
 						</div>
@@ -69,12 +69,14 @@ const BannerHome = () => {
 							<button
 								className="bg-white/70 text-black z-10 p-1 rounded-full text-xl"
 								onClick={handlePrev}
+								aria-label="Previous slide"
 							>
 								<FaAngleLeft />
 							</button>
 							<button
 								className="bg-white/70 text-black z-10 p-1 rounded-full text-xl"
 								onClick={handleNext}
+								aria-label="Next slide"
 							>
 								<FaAngleRight />
 							</button>
@@ -101,6 +103,7 @@ const BannerHome = () => {
 								<button
 									onClick={() => handlePlayVideo(data)}
 									className="flex items-center gap-2 bg-white hover:bg-gradient-to-l from-red-700 to-orange-500 px-3 py-2 text-black font-bold rounded mt-4 shadow-md transition-all hover:scale-105"
+									aria-label={`Play ${data?.title ?? data?.name} trailer`}
 								>
 									Play Now <IoPlayCircleSharp className="text-2xl" />
 								</button>

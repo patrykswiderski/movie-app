@@ -74,11 +74,16 @@ const SearchPage = () => {
 					placeholder="Search here..."
 					onChange={(e) => navigate(`/search?q=${e.target.value}`)}
 					className="px-4 py-2 w-full text-lg bg-neutral-100 text-neutral-900 rounded-full outline-none border-none"
+					aria-label="Search input"
 				/>
 			</div>
 
 			<div className="container mx-auto">
-				<h3 className="capitalize text-lg lg:text-3xl font-semibold my-3 px-3">
+				<h3
+					className="capitalize text-lg lg:text-3xl font-semibold my-3 px-3"
+					tabIndex="0"
+					aria-live="polite"
+				>
 					Search Results
 				</h3>
 
@@ -89,6 +94,9 @@ const SearchPage = () => {
 								data={searchData}
 								key={searchData.id + "search" + index}
 								media_type={searchData.media_type}
+								aria-label={`Result ${index + 1}: ${
+									searchData.title || searchData.name
+								}`}
 							/>
 						);
 					})}

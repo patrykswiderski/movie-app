@@ -5,8 +5,12 @@ const Footer = () => {
 	return (
 		<footer className="text-center bg-neutral-600 bg-opacity-35 text-neutral-300 py-2">
 			<div className="flex justify-center items-center gap-4">
-				<Link to="/">About</Link>
-				<Link to="/">Contact</Link>
+				<Link to="/" aria-label="About Page">
+					About
+				</Link>
+				<Link to="/" aria-label="Contact Page">
+					Contact
+				</Link>
 			</div>
 			<p className="text-sm">Created by Patryk Świderski</p>
 		</footer>

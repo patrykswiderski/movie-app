@@ -22,6 +22,8 @@ const HorizontalScrollCard = ({ data = [], heading, trending, media_type }) => {
 				<div
 					ref={containerRef}
 					className="grid grid-cols-[repeat(auto-fit,230px)] grid-flow-col gap-6 overflow-hidden overflow-x-scroll relative z-10 scroll-smooth transition-all scrollbar-none p-2"
+					aria-label={heading}
+					role="region"
 				>
 					{data.map((data, index) => {
 						return (
@@ -38,10 +40,10 @@ const HorizontalScrollCard = ({ data = [], heading, trending, media_type }) => {
 
 				<div className="absolute top-0 w-full h-full hidden group-hover:lg:flex items-center justify-between px-2">
 					<button className="bg-white/70 p-1 text-black z-10 -ml-5 rounded-full text-lg">
-						<FaAngleLeft onClick={handlePrev} />
+						<FaAngleLeft onClick={handlePrev} aria-label="Scroll left" />
 					</button>
 					<button className="bg-white/70 p-1 text-black z-10 -mr-5 rounded-full text-lg">
-						<FaAngleRight onClick={handleNext} />
+						<FaAngleRight onClick={handleNext} aria-label="Scroll right" />
 					</button>
 				</div>
 			</div>

@@ -28,16 +28,20 @@ const Header = () => {
 					<img src={Logo} alt="logo" width={120} />
 				</Link>
 
-				<nav className="hidden lg:flex items-center gap-2 ml-5">
+				<nav
+					className="hidden lg:flex items-center gap-2 ml-5"
+					aria-label="Primary navigation"
+				>
 					{navigation.map((nav, index) => {
 						return (
-							<div key={nav + index}>
+							<div key={nav.label + index}>
 								<NavLink
 									key={nav.label}
 									to={nav.href}
 									className={({ isActive }) =>
 										`px-2 hover:text-neutral-50 ${isActive && " text-white"}`
 									}
+									aria-label={nav.label}
 								>
 									{nav.label}
 								</NavLink>
@@ -47,21 +51,30 @@ const Header = () => {
 				</nav>
 
 				<div className="ml-auto flex items-center gap-4">
-					<form className="flex items-center gap-2" onSubmit={handleSubmit}>
+					<form
+						className="flex items-center gap-2"
+						onSubmit={handleSubmit}
+						role="search"
+						aria-label="Site search"
+					>
 						<input
 							type="text"
 							placeholder="Search here..."
 							className="bg-transparent px-4 py-1 outline-none border-none hidden lg:block"
 							onChange={(e) => setSearchInput(e.target.value)}
 							value={searchInput}
+							aria-label="Search input"
 						/>
-						<button className="text-2xl text-white hidden lg:block">
+						<button
+							className="text-2xl text-white hidden lg:block"
+							aria-label="Search"
+						>
 							<IoSearchOutline />
 						</button>
 					</form>
 
 					<div className="w-9 h-9 overflow-hidden cursor-pointer active:scale-50 transition-all">
-						<img src={UserIcon} alt="logo" width="100%" />
+						<img src={UserIcon} alt="User profile" width="100%" />
 					</div>
 				</div>
 			</div>

@@ -48,12 +48,17 @@ const ExplorePage = () => {
 
 	useEffect(() => {
 		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
 	return (
 		<div className="py-16">
 			<div className="container mx-auto">
-				<h3 className="text-lg lg:text-3xl font-semibold px-3 my-3 capitalize">
+				<h3
+					className="text-lg lg:text-3xl font-semibold px-3 my-3 capitalize"
+					tabIndex="0"
+					aria-live="polite"
+				>
 					Popular
 					{params.explore === "tv"
 						? ` ${params.explore.toUpperCase()} shows`
@@ -67,6 +72,9 @@ const ExplorePage = () => {
 								data={exploreData}
 								key={exploreData.id + "exploreSection" + index}
 								media_type={params.explore}
+								aria-label={`Result ${index + 1}: ${
+									exploreData.title || exploreData.name
+								}`}
 							/>
 						);
 					})}

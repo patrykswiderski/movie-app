@@ -32,15 +32,24 @@ const CastList = ({ castData }) => {
 									className="text-neutral-400 cursor-pointer hover:text-white"
 									onMouseEnter={() => handleMouseEnter(castMember.id)}
 									onMouseLeave={handleMouseLeave}
+									aria-describedby={
+										hoveredCastId === castMember.id
+											? `tooltip-${castMember.id}`
+											: undefined
+									}
 								>
 									{castMember.name}
 								</p>
 								{hoveredCastId === castMember.id && (
-									<div className="absolute left-1/2 -translate-x-1/2 -top-56 w-52 h-52 rounded-full z-20 shadow-2xl shadow-neutral-500/50">
+									<div
+										className="absolute left-1/2 -translate-x-1/2 -top-56 w-52 h-52 rounded-full z-20 shadow-2xl shadow-neutral-500/50"
+										role="tooltip"
+										id={`tooltip-${castMember.id}`}
+									>
 										{castMember.profile_path ? (
 											<img
 												src={imageURL + castMember.profile_path}
-												alt="cast member"
+												alt={`${castMember.name}'s profile`}
 												className="h-full w-full object-cover rounded-full"
 											/>
 										) : (
@@ -58,6 +67,7 @@ const CastList = ({ castData }) => {
 						<button
 							onClick={handleToggleShowAll}
 							className="ml-2 hover:text-white text-sm"
+							aria-label="Show more cast members"
 						>
 							. . .
 						</button>
@@ -66,6 +76,7 @@ const CastList = ({ castData }) => {
 						<button
 							onClick={handleToggleShowAll}
 							className="ml-2 hover:text-white text-sm "
+							aria-label="Show less cast members"
 						>
 							. . . show less
 						</button>

@@ -29,16 +29,25 @@ const JobFilter = ({ jobName, jobNameSecond = null, castData, label }) => {
 									className="text-neutral-400 cursor-pointer"
 									onMouseEnter={() => handleMouseEnter(crewMember.id)}
 									onMouseLeave={handleMouseLeave}
+									aria-describedby={
+										hoveredCrewId === crewMember.id
+											? `tooltip-${crewMember.id}`
+											: undefined
+									}
 								>
 									{crewMember.name}
 								</p>
 								{hoveredCrewId === crewMember.id && (
-									<div className="absolute left-1/2 -translate-x-1/2 -top-56 w-52 h-52 rounded-full z-20 shadow-2xl shadow-neutral-500/50 ">
+									<div
+										className="absolute left-1/2 -translate-x-1/2 -top-56 w-52 h-52 rounded-full z-20 shadow-2xl shadow-neutral-500/50 "
+										role="tooltip"
+										id={`tooltip-${crewMember.id}`}
+									>
 										<div className="relative w-full h-full ">
 											{crewMember.profile_path ? (
 												<img
 													src={imageURL + crewMember.profile_path}
-													alt="crew member"
+													alt={`${crewMember.name}'s profile`}
 													className="h-full w-full object-cover rounded-full"
 												/>
 											) : (

@@ -18,11 +18,13 @@ const Home = () => {
 				data={trendingData}
 				heading="Trending Now"
 				trending={true}
+				aria-label="Trending Now"
 			/>
 			<HorizontalScrollCard
 				data={nowPlayingData}
 				heading="Now Playing"
 				media_type={"movie"}
+				aria-label="Now Playing Movies"
 			/>
 			<HorizontalScrollCard
 				data={topRatedData}
@@ -33,11 +35,13 @@ const Home = () => {
 				data={popularTvData}
 				heading="Popular TV Shows"
 				media_type={"tv"}
+				aria-label="Top Rated Movies"
 			/>
 			<HorizontalScrollCard
 				data={onTheAirData}
 				heading="On The Air TV Shows"
 				media_type={"tv"}
+				aria-label="On The Air TV Shows"
 			/>
 		</div>
 	);

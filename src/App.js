@@ -36,9 +36,9 @@ function App() {
 	}, []);
 
 	return (
-		<main className="pb-14 lg:pb-0">
+		<main className="pb-14 lg:pb-0" role="main" aria-label="Main Content">
 			<Header />
-			<div className="min-h-screen">
+			<div className="min-h-screen" tabIndex="-1">
 				<Outlet />
 			</div>
 			<Footer />
